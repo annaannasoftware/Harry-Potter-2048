@@ -3,8 +3,8 @@
 html, body {
   margin: 0;
   padding: 0;
-  background: #9cc2d2;
-  color: #354b59;
+  background: #fc0000;
+  color: #ffd000;
   font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
   font-family: "Whitney SSm A","Whitney SSm B","Helvetica Neue",Helvetica,Arial,sans-serif;
   font-size: 18px; }
@@ -25,11 +25,11 @@ span.tile-text {
  
 input {
   display: inline-block;
-  background: #8f7a66;
+  background: #ff0000;
   border-radius: 3px;
   padding: 0 20px;
   text-decoration: none;
-  color: #f9f6f2;
+  color: #ffee00;
   height: 40px;
   line-height: 42px;
   cursor: pointer;
@@ -44,16 +44,16 @@ input {
   appearance: none; }
   input[type="text"], input[type="email"] {
     cursor: auto;
-    background: #fcfbf9;
+    background: #ff0202;
     font-weight: normal;
-    color: #776e65;
+    color: #ffc400;
     padding: 0 15px; }
     input[type="text"]::-webkit-input-placeholder, input[type="email"]::-webkit-input-placeholder {
-      color: #9d948c; }
+      color: #ffbb00; }
     input[type="text"]::-moz-placeholder, input[type="email"]::-moz-placeholder {
-      color: #9d948c; }
+      color: #df1717; }
     input[type="text"]:-ms-input-placeholder, input[type="email"]:-ms-input-placeholder {
-      color: #9d948c; }
+      color: #f8cb00; }
  
 .heading:after {
   content: "";
@@ -98,14 +98,14 @@ h1.title {
 .score-container, .best-container {
   position: relative;
   display: inline-block;
-  background: #0c92bf;
+  background: #ffee00;
   padding: 15px 25px;
   font-size: 25px;
   height: 25px;
   line-height: 47px;
   font-weight: bold;
   border-radius: 3px;
-  color: white;
+  color: rgb(255, 0, 0);
   margin-top: 8px;
   text-align: center; }
   .score-container:after, .best-container:after {
@@ -117,7 +117,7 @@ h1.title {
     font-size: 13px;
     line-height: 13px;
     text-align: center;
-    color: #eee4da; }
+    color: #ff0000; }
   .score-container .score-addition, .best-container .score-addition {
     position: absolute;
     right: 30px;
@@ -211,7 +211,7 @@ hr {
   -ms-user-select: none;
   -ms-touch-action: none;
   touch-action: none;
-  background: #1e6477;
+  background: #606cda;
   border-radius: 6px;
   width: 500px;
   height: 500px;
@@ -311,7 +311,7 @@ hr {
   margin-right: 15px;
   float: left;
   border-radius: 3px;
-  background: rgba(238, 228, 218, 0.35); }
+  background: rgba(235, 211, 0, 0.35); }
   .grid-cell:last-child {
     margin-right: 0; }
  
