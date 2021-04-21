@@ -87,4 +87,67 @@ gameContainer.addEventListener (this.eventTouchstart, function(event) {
         return;
     }
 
-    if
+    if (window.navigator.msPointerEnabled) {
+        touchStartClientX = event.pageX;
+        touchStartClientY = event.pageY;
+    } else {
+        touchStartClientX = event.touches[0].clientX;
+        touchStartClientY = event.touches[0].clientY;
+    }
+
+    event.preventDefault  ();
+});
+
+gameContainer.addEventListener (this.eventTouchmove, function (event) {
+    event.preventDefault ();
+});
+
+gameContainer.addEventListener (this.eventTouchend, function (event) {
+    if ((!window.navigator.msPointerEnabled && event.touches.length > 0) ||
+    event.TargetTouches > 0 || 
+    self.targetIsInput (event)) {
+        return;
+    }
+
+    var  touchEndClientX, touchEndClientY;
+
+    if (window.navigator.msPointerEnabled) {
+        touchEndClientX = event.pageX;
+        touchEndClientY = event.pageY;
+    } else {
+        touchEndClientX = event.changedTouches[0].clientX;
+        touchEndClientY = event.changedTouches[0].clientY;
+    }
+
+    var dx = touchEndClientX - touchStartClientX
+    var absDx = Math.abs (dx);
+
+    var dy = touchEndClientY - touchStartClientY
+    var absDy = Math.abs (dy);
+
+    if (Math.max (absDx, absDy) >10) {
+
+        self.emit ("move", absDx > absDy ? (dx > 0 ? 1 : 3) : (dy > 0 ? 2 : 0););
+    }
+});
+};
+
+KeyboardInputManager.prototype.restart = function (event) {
+    event.preventDefault ();
+    this.emit ("restart");
+};
+
+KeyboardInputManager.prototype.keepPlaying = function (event) {
+    event.preventDefault ();
+    this.emit ("keepPlaying");
+};
+
+KeyboardInputManager.prototype.bindButtonPress  = function (selector, fn) {
+    var button = document.querySelector (selector);
+    button.addEventListener ("click", fn.bind (this));
+    button.addEventListener (this.eventTouchend, fn.bind (this));
+};
+
+KeyboardInputManager.prototype.targetIsInput = function (event) {
+    return event.target.tagName.toLowerCase () === "input";
+};
