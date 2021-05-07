@@ -100,3 +100,65 @@ HTMLActuator.prototype.addTile = function (tile) {
         });
     } else {
         classes.push ("tile-new");
+        this.applyClasses (wrapper, classes);
+    }
+
+    //add the inner part of the tile to the wrapper
+    wrapper.appendChild (inner);
+
+    //put the tile on the board
+    this.tileContainer.appendChild (wrapper);
+};
+
+HTMLActuator.prototype.applyClasses = function (element, classes) {
+    element.setAttribute ("class", classes.join (" "));
+};
+
+HTMLActuator.prototype.normalizePosition = function (position) {
+    return {x : position.x + 1, y : position.y + 1};
+};
+
+HTMLActuator.prototype.positionClass = function (position) {
+    position = this.normalizePosition (position);
+    return "tile-position-" + position.x + "-" + position.y;
+};
+
+HTMLActuator.prototype.updateScore = function (score) {
+    this.clearContainer (this.scoreContainer);
+
+    var difference = score - this.score;
+    this.score = score;
+
+    this.scoreContainer.textContent = this.score;
+
+    if (difference > 0) {
+        var addition = document.createElement ("div");
+        addition.classList.add ("score-addition");
+        addition.textContent = "+" + difference;
+
+        this.scoreContainer.appendChild (addition);
+    }
+};
+
+HTMLActuator.prototype.updateBestScore = function (bestScore) {
+    this.bestContainer.textContent = bestScore;
+};
+
+HTMLActuator.prototype.message = function (won) {
+    var type = won ? "game-won" : "game-over";
+    var message = won ? "YOU WIN" : "GAME OVER, GET A LIFE!";
+
+    if (typeof ga !== "undefined") {
+        ga ("send", "event", "game", "end", type, this.score);
+    }
+
+    this.messageContainer.classList.add (type);
+    this.messageContainer.getElementsByTagName ("p") [0].textContent = message;
+
+    this.clearContainer (this.sharingContainer);
+    this.sharingContainer.appendChild (this.scoreTweetButton());
+    twttr.widgets.load ();
+};
+
+HTMLActuator.prototype.clearMessage = function () {
+    //ie only takes one value to remove at a time
