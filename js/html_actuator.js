@@ -162,3 +162,18 @@ HTMLActuator.prototype.message = function (won) {
 
 HTMLActuator.prototype.clearMessage = function () {
     //ie only takes one value to remove at a time
+    this.messageContainer.classList.remove ("game-won");
+    this.messageContainer.classList.remove ("game-over");
+};
+
+HTMLActuator.prototype.scoreTweetButton = function () {
+    var tweet = document.createElement ("a");
+    tweet.classList.add ("twitter-share-button");
+    tweet.setAttribute ("href", "https://twitter.com/share");
+    tweet.textContent = "tweet";
+
+    var text = "" + this.score + "Points earned in Harry Potter 2048. If you want to beat my score go to https://tinyurl.com/HarryPotter2048"
+    tweet.setAttribute ("data-text", text);
+    
+    return tweet;
+};
