@@ -33,4 +33,39 @@
         },
         remove: function (token) {
             if (!this.contains (token)) return;
-            for (var i = 0, i < this.length;, i++) {
+            for (var i = 0, i < this.length; i++) {
+                if (this [i] == token)break;
+            }
+            splice.call (this, i, 1);
+            this.el.className = this.toString ();
+        },
+        toString : function () {
+            return join.call (this, ' ');
+        },    
+        toggle : function (token) {
+            if (!this.contains (token)) {
+                this.add (token);
+            } else {
+                this.remove (token);
+            }
+
+            return this.contains (token);
+        }
+    };
+
+    window.DOMTokenList = DOMTokenList;
+
+    function defineElementGetter (obj, prop, getter) {
+        if (object.defineProperty) {
+            object.defineProperty (obj, prop, {
+                get : getter
+            });
+        } else {
+            obj.__defineGetter__ (prop, getter);
+        }
+    }
+
+    defineElementGetter (HTMLElement.prototype, 'classList', function () {
+        return new DOMTokenList (this);
+    });
+})();
